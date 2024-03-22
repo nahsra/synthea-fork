@@ -86,8 +86,8 @@ public abstract class Actions {
     Bundle returnBundle = bundle;
     // most actions modify the bundle in-place, but some might return a whole new one
 
-    if (action.containsKey("profiles")) {
-      applyProfiles(bundle, (List<Map<String, String>>) action.get("profiles"));
+    if (action.containsKey(PROFILES)) {
+      applyProfiles(bundle, (List<Map<String, String>>) action.get(PROFILES));
 
     } else if (action.containsKey("set_values")) {
       setValues(bundle, (List<Map<String, Object>>) action.get("set_values"), person, fjContext);
@@ -225,7 +225,7 @@ public abstract class Actions {
         basedOnModule = (String) basedOn.get("module");
       }
 
-      List<String> profiles = (List<String>) newResourceDef.get("profiles");
+      List<String> profiles = (List<String>) newResourceDef.get(PROFILES);
       List<Map<String, Object>> fields = (List<Map<String, Object>>) newResourceDef.get("fields");
 
       List<Base> basedOnResources;
@@ -275,7 +275,7 @@ public abstract class Actions {
 
           Encounter encounterAtThatState = findEncounterAtState(instance, bundle);
           if (encounterAtThatState != null) {
-            dummyEncounter.setPartOf(new Reference("urn:uuid:" + encounterAtThatState.getId()));
+            dummyEncounter.setPartOf(new Reference(URN_UUID + encounterAtThatState.getId()));
             dummyEncounter.setParticipant(encounterAtThatState.getParticipant());
             // TODO: copy any other fields over?
           }
@@ -288,7 +288,7 @@ public abstract class Actions {
           // so that the end user doesn't have to know we used an Encounter
 
           for (Map<String, Object> field : fields) {
-            Object valueDef = field.get("value");
+            Object valueDef = field.get(VALUE);
             if (valueDef instanceof String && ((String) valueDef).startsWith("$")) {
               String value = (String) valueDef;
               if (value.contains("State.")) {
@@ -296,7 +296,7 @@ public abstract class Actions {
                     .replace("State.entered", "Encounter.period.start")
                     .replace("State.exited", "Encounter.period.end");
 
-                field.put("value", value);
+                field.put(VALUE, value);
               }
             }
           }
@@ -335,7 +335,7 @@ public abstract class Actions {
         BundleEntryComponent newEntry = bundle.addEntry();
 
         newEntry.setResource(createdResource);
-        newEntry.setFullUrl("urn:uuid:" + createdResource.getId());
+        newEntry.setFullUrl(URN_UUID + createdResource.getId());
 
         if (bundle.getType().equals(BundleType.TRANSACTION)) {
           BundleEntryRequestComponent request = newEntry.getRequest();
@@ -421,7 +421,7 @@ public abstract class Actions {
 
     for (Map<String, Object> field : fields) {
       String location = (String)field.get("location");
-      Object valueDef = field.get("value");
+      Object valueDef = field.get(VALUE);
       String transform = (String)field.get("transform");
 
       if (valueDef == null) {
@@ -784,7 +784,7 @@ public abstract class Actions {
     // from some testing, ids in HAPI also seem to be a little flaky
     String id = resource.getId();
 
-    if (id.startsWith("urn:uuid:")) {
+    if (id.startsWith(URN_UUID)) {
       return id;
     }
 
@@ -842,4 +842,10 @@ public abstract class Actions {
          "display", code.display);
     return codeAsMap;
   }
+  
+  private static final String URN_UUID = "urn:uuid:";
+  
+  private static final String VALUE = "value";
+  
+  private static final String PROFILES = "profiles";
 }

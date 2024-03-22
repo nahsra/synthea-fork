@@ -380,7 +380,7 @@ public abstract class FieldWrapper {
         ));
 
     dateFields.put(ResourceType.Encounter, List.of(
-        new DateFieldWrapper(Encounter.class, "period")
+        new DateFieldWrapper(Encounter.class, PERIOD)
       ));
 
     dateFields.put(ResourceType.Condition, List.of(
@@ -398,7 +398,7 @@ public abstract class FieldWrapper {
       ));
 
     dateFields.put(ResourceType.Observation, List.of(
-        new DateFieldWrapper(Observation.class, "effective"),
+        new DateFieldWrapper(Observation.class, EFFECTIVE),
         // new DateFieldWrapper(Observation.class, "value"),
         // value could technically be a date but I don't think we ever use that
         new DateFieldWrapper(Observation.class, "issued")
@@ -409,11 +409,11 @@ public abstract class FieldWrapper {
       ));
 
     dateFields.put(ResourceType.MedicationAdministration, List.of(
-        new DateFieldWrapper(MedicationAdministration.class, "effective")
+        new DateFieldWrapper(MedicationAdministration.class, EFFECTIVE)
       ));
 
     dateFields.put(ResourceType.CarePlan, List.of(
-        new DateFieldWrapper(CarePlan.class, "period")
+        new DateFieldWrapper(CarePlan.class, PERIOD)
       ));
 
     dateFields.put(ResourceType.Goal, List.of(
@@ -421,7 +421,7 @@ public abstract class FieldWrapper {
       ));
 
     dateFields.put(ResourceType.CareTeam, List.of(
-        new DateFieldWrapper(CareTeam.class, "period")
+        new DateFieldWrapper(CareTeam.class, PERIOD)
       ));
 
     dateFields.put(ResourceType.ImagingStudy, List.of(
@@ -430,7 +430,7 @@ public abstract class FieldWrapper {
       ));
 
     dateFields.put(ResourceType.DiagnosticReport, List.of(
-        new DateFieldWrapper(DiagnosticReport.class, "effective"),
+        new DateFieldWrapper(DiagnosticReport.class, EFFECTIVE),
         new DateFieldWrapper(DiagnosticReport.class, "issued")
       ));
 
@@ -507,53 +507,53 @@ public abstract class FieldWrapper {
     Map<ResourceType, List<ReferenceFieldWrapper>> refFields = new HashMap<>();
 
     refFields.put(ResourceType.Encounter, List.of(
-        new ReferenceFieldWrapper(Encounter.class, "subject"),
+        new ReferenceFieldWrapper(Encounter.class, SUBJECT),
         new ReferenceFieldWrapper(Encounter.class, "location.location"),
         new ReferenceFieldWrapper(Encounter.class, "participant.individual")
       ));
 
     refFields.put(ResourceType.Condition, List.of(
-          new ReferenceFieldWrapper(Condition.class, "subject"),
-          new ReferenceFieldWrapper(Condition.class, "encounter")
+          new ReferenceFieldWrapper(Condition.class, SUBJECT),
+          new ReferenceFieldWrapper(Condition.class, ENCOUNTER)
         ));
 
     refFields.put(ResourceType.AllergyIntolerance, List.of(
-        new ReferenceFieldWrapper(AllergyIntolerance.class, "patient")
+        new ReferenceFieldWrapper(AllergyIntolerance.class, PATIENT)
       ));
 
     refFields.put(ResourceType.Procedure, List.of(
-        new ReferenceFieldWrapper(Procedure.class, "subject"),
-        new ReferenceFieldWrapper(Procedure.class, "encounter"),
-        new ReferenceFieldWrapper(Procedure.class, "reasonReference")
+        new ReferenceFieldWrapper(Procedure.class, SUBJECT),
+        new ReferenceFieldWrapper(Procedure.class, ENCOUNTER),
+        new ReferenceFieldWrapper(Procedure.class, REASONREFERENCE)
       ));
 
     refFields.put(ResourceType.MedicationRequest, List.of(
-        new ReferenceFieldWrapper(MedicationRequest.class, "subject"),
-        new ReferenceFieldWrapper(MedicationRequest.class, "encounter"),
+        new ReferenceFieldWrapper(MedicationRequest.class, SUBJECT),
+        new ReferenceFieldWrapper(MedicationRequest.class, ENCOUNTER),
         new ReferenceFieldWrapper(MedicationRequest.class, "medication"),
-        new ReferenceFieldWrapper(MedicationRequest.class, "reasonReference")
+        new ReferenceFieldWrapper(MedicationRequest.class, REASONREFERENCE)
       ));
 
     refFields.put(ResourceType.MedicationAdministration, List.of(
-        new ReferenceFieldWrapper(MedicationAdministration.class, "subject"),
+        new ReferenceFieldWrapper(MedicationAdministration.class, SUBJECT),
         new ReferenceFieldWrapper(MedicationAdministration.class, "context"),
-        new ReferenceFieldWrapper(MedicationAdministration.class, "reasonReference")
+        new ReferenceFieldWrapper(MedicationAdministration.class, REASONREFERENCE)
       ));
 
     refFields.put(ResourceType.Observation, List.of(
-        new ReferenceFieldWrapper(Observation.class, "subject"),
-        new ReferenceFieldWrapper(Observation.class, "encounter")
+        new ReferenceFieldWrapper(Observation.class, SUBJECT),
+        new ReferenceFieldWrapper(Observation.class, ENCOUNTER)
       ));
 
     refFields.put(ResourceType.DiagnosticReport, List.of(
-        new ReferenceFieldWrapper(DiagnosticReport.class, "subject"),
-        new ReferenceFieldWrapper(DiagnosticReport.class, "encounter"),
+        new ReferenceFieldWrapper(DiagnosticReport.class, SUBJECT),
+        new ReferenceFieldWrapper(DiagnosticReport.class, ENCOUNTER),
         new ReferenceFieldWrapper(DiagnosticReport.class, "result")
       ));
 
     refFields.put(ResourceType.CarePlan, List.of(
-        new ReferenceFieldWrapper(CarePlan.class, "subject"),
-        new ReferenceFieldWrapper(CarePlan.class, "encounter"),
+        new ReferenceFieldWrapper(CarePlan.class, SUBJECT),
+        new ReferenceFieldWrapper(CarePlan.class, ENCOUNTER),
         new ReferenceFieldWrapper(CarePlan.class, "careTeam"),
         new ReferenceFieldWrapper(CarePlan.class, "addresses"),
         new ReferenceFieldWrapper(CarePlan.class, "activity.detail.reason"),
@@ -561,44 +561,44 @@ public abstract class FieldWrapper {
       ));
 
     refFields.put(ResourceType.Goal, List.of(
-        new ReferenceFieldWrapper(Goal.class, "subject"),
+        new ReferenceFieldWrapper(Goal.class, SUBJECT),
         new ReferenceFieldWrapper(Goal.class, "addresses")
       ));
 
     refFields.put(ResourceType.CareTeam, List.of(
-        new ReferenceFieldWrapper(CareTeam.class, "subject"),
-        new ReferenceFieldWrapper(CareTeam.class, "encounter")
+        new ReferenceFieldWrapper(CareTeam.class, SUBJECT),
+        new ReferenceFieldWrapper(CareTeam.class, ENCOUNTER)
       ));
 
     refFields.put(ResourceType.Immunization, List.of(
-        new ReferenceFieldWrapper(Immunization.class, "patient"),
-        new ReferenceFieldWrapper(Immunization.class, "encounter")
+        new ReferenceFieldWrapper(Immunization.class, PATIENT),
+        new ReferenceFieldWrapper(Immunization.class, ENCOUNTER)
       ));
 
     refFields.put(ResourceType.Device, List.of(
-        new ReferenceFieldWrapper(Device.class, "patient")
+        new ReferenceFieldWrapper(Device.class, PATIENT)
       ));
 
     refFields.put(ResourceType.SupplyDelivery, List.of(
-        new ReferenceFieldWrapper(SupplyDelivery.class, "patient")
+        new ReferenceFieldWrapper(SupplyDelivery.class, PATIENT)
       ));
 
     refFields.put(ResourceType.ImagingStudy, List.of(
-        new ReferenceFieldWrapper(ImagingStudy.class, "subject"),
-        new ReferenceFieldWrapper(ImagingStudy.class, "encounter")
+        new ReferenceFieldWrapper(ImagingStudy.class, SUBJECT),
+        new ReferenceFieldWrapper(ImagingStudy.class, ENCOUNTER)
       ));
 
     refFields.put(ResourceType.DocumentReference, List.of(
-        new ReferenceFieldWrapper(DocumentReference.class, "subject")
+        new ReferenceFieldWrapper(DocumentReference.class, SUBJECT)
       ));
 
     refFields.put(ResourceType.Media, List.of(
-        new ReferenceFieldWrapper(Media.class, "subject"),
-        new ReferenceFieldWrapper(Media.class, "encounter")
+        new ReferenceFieldWrapper(Media.class, SUBJECT),
+        new ReferenceFieldWrapper(Media.class, ENCOUNTER)
       ));
 
     refFields.put(ResourceType.Claim, List.of(
-        new ReferenceFieldWrapper(Claim.class, "patient"),
+        new ReferenceFieldWrapper(Claim.class, PATIENT),
         new ReferenceFieldWrapper(Claim.class, "item.encounter"),
         new ReferenceFieldWrapper(Claim.class, "prescription"),
         new ReferenceFieldWrapper(Claim.class, "procedure.procedure"),  // procedureReference
@@ -607,7 +607,7 @@ public abstract class FieldWrapper {
       ));
 
     refFields.put(ResourceType.ExplanationOfBenefit, List.of(
-        new ReferenceFieldWrapper(ExplanationOfBenefit.class, "patient"),
+        new ReferenceFieldWrapper(ExplanationOfBenefit.class, PATIENT),
         new ReferenceFieldWrapper(ExplanationOfBenefit.class, "claim"),
         new ReferenceFieldWrapper(ExplanationOfBenefit.class, "provider")
       ));
@@ -618,4 +618,16 @@ public abstract class FieldWrapper {
 
     return refFields;
   }
+  
+  private static final String PERIOD = "period";
+  
+  private static final String EFFECTIVE = "effective";
+  
+  private static final String SUBJECT = "subject";
+  
+  private static final String ENCOUNTER = "encounter";
+  
+  private static final String PATIENT = "patient";
+  
+  private static final String REASONREFERENCE = "reasonReference";
 }
