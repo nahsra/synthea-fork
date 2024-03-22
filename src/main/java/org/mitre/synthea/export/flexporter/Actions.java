@@ -49,6 +49,9 @@ import org.mitre.synthea.world.concepts.HealthRecord.Code;
 @SuppressWarnings("unchecked") // For now
 public abstract class Actions {
 
+private Actions() {
+}
+
   /**
    * Apply the given Mapping to the provided Bundle.
    * @param bundle FHIR bundle
