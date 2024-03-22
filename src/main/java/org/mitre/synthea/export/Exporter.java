@@ -241,7 +241,7 @@ public abstract class Exporter {
 
     if (Config.getAsBoolean("exporter.fhir_stu3.export")) {
       File outDirectory = getOutputFolder("fhir_stu3", person);
-      if (Config.getAsBoolean("exporter.fhir.bulk_data")) {
+      if (Config.getAsBoolean(EXPORTER_FHIR_BULK_DATA)) {
         org.hl7.fhir.dstu3.model.Bundle bundle = FhirStu3.convertToFHIR(person, stopTime);
         IParser parser = FhirStu3.getContext().newJsonParser().setPrettyPrint(false);
         for (org.hl7.fhir.dstu3.model.Bundle.BundleEntryComponent entry : bundle.getEntry()) {
@@ -258,7 +258,7 @@ public abstract class Exporter {
     }
     if (Config.getAsBoolean("exporter.fhir_dstu2.export")) {
       File outDirectory = getOutputFolder("fhir_dstu2", person);
-      if (Config.getAsBoolean("exporter.fhir.bulk_data")) {
+      if (Config.getAsBoolean(EXPORTER_FHIR_BULK_DATA)) {
         ca.uhn.fhir.model.dstu2.resource.Bundle bundle = FhirDstu2.convertToFHIR(person, stopTime);
         IParser parser = FhirDstu2.getContext().newJsonParser().setPrettyPrint(false);
         for (ca.uhn.fhir.model.dstu2.resource.Bundle.Entry entry : bundle.getEntry()) {
@@ -293,7 +293,7 @@ public abstract class Exporter {
       }
 
       IParser parser = FhirR4.getContext().newJsonParser();
-      if (Config.getAsBoolean("exporter.fhir.bulk_data")) {
+      if (Config.getAsBoolean(EXPORTER_FHIR_BULK_DATA)) {
         parser.setPrettyPrint(false);
         for (org.hl7.fhir.r4.model.Bundle.BundleEntryComponent entry : bundle.getEntry()) {
           String filename = entry.getResource().getResourceType().toString() + ".ndjson";
@@ -823,4 +823,6 @@ public abstract class Exporter {
           + person.attributes.get(Person.ID) + tag + "." + extension;
     }
   }
+  
+  private static final String EXPORTER_FHIR_BULK_DATA = "exporter.fhir.bulk_data";
 }
